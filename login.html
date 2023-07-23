@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>注册与登录</title>
+  <style>
+    .container {
+      width: 300px;
+      margin: auto;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+  <script>
+    function validateForm() {
+      var username = document.forms["registrationForm"]["username"].value;
+      var password = document.forms["registrationForm"]["password"].value;
+
+      if (username == "" || password == "") {
+        alert("请填写用户名和密码");
+        action="ciee_Login.py"
+        return false;
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>注册</h2>
+    <form name="registrationForm" action="#">
+      <input type="text" name="username" placeholder="用户名"><br>
+      <input type="password" name="password" placeholder="密码"><br>
+      <input type="submit" value="注册" onclick="return validateForm()">
+    </form>
+  </div>
+
+  <div class="container">
+    <h2>登录</h2>
+    <form action="#">
+      <input type="text" name="username" placeholder="用户名"><br>
+      <input type="password" name="password" placeholder="密码"><br>
+      <input type="submit" value="登录">
+    </form>
+  </div>
+
+  <div class="container">
+    <h2>表格添加/验证</h2>
+    <form name="tableForm" action="#">
+      <table id="myTable">
+        <tr>
+          <th>姓名</th>
+          <th>年龄</th>
+        </tr>
+        <tr>
+          <td><input type="text" name="name" placeholder="姓名"></td>
+          <td><input type="text" name="age" placeholder="年龄"></td>
+        </tr>
+      </table>
+      <input type="button" value="添加行" onclick="addRow()">
+      <input type="submit" value="提交" onclick="return validateTable()">
+    </form>
+  </div>
+
+  <script>
+    function addRow() {
+      var table = document.getElementById("myTable");
+      var row = table.insertRow(-1);
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      cell1.innerHTML = '<input type="text" name="name" placeholder="姓名">';
+      cell2.innerHTML = '<input type="text" name="age" placeholder="年龄">';
+    }
+
+    function validateTable() {
+      var table = document.forms["tableForm"]["myTable"];
+      for (var i = 1; i < table.rows.length; i++) {
+        var name = table.rows[i].cells[0].getElementsByTagName('input')[0].value;
+        var age = table.rows[i].cells[1].getElementsByTagName('input')[0].value;
+
+        if (name == "" || age == "") {
+          alert("请填写姓名和年龄");
+          return false;
+        }
+      }
+    }
+  </script>
+</body>
+</html>
